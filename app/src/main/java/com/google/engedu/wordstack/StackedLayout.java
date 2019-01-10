@@ -43,15 +43,19 @@ public class StackedLayout extends LinearLayout {
   }
 
   public View pop() {
-    // pop a tile from tiles
-    View popped = tiles.pop();
-    if (popped != null) {
-      // call removeView with it
-      // call addView with the tile that is now on top of the stack
+    View popped = null;
+
+    if (!tiles.empty()) {
+      // Pop a view from the tiles and remove it from the screen.
+      popped = tiles.pop();
       removeView(popped);
-      addView(tiles.peek());
+      // If there are any letters left in the stack, show the next one.
+      if (!tiles.empty()) {
+        addView(tiles.peek());
+      }
     }
-    // return the popped tile
+
+    // Return the popped tile (or null if the stack is empty).
     return popped;
   }
 
