@@ -152,10 +152,16 @@ public class MainActivity extends AppCompatActivity {
         word2 = words.get(word2Index);
 
         String scrambledWords = scramble(word1, word2);
+
+        for (int i = scrambledWords.length()-1; i >= 0; i--) {
+            stackedLayout.push(new LetterTile(this, scrambledWords.charAt(i)));
+        }
+
         Log.i(TAG, word1 + " + " + word2 + " = " + scrambledWords);
 
         TextView messageBox = (TextView) findViewById(R.id.message_box);
         messageBox.setText(word1 + " + " + word2 + " = " + scrambledWords);
+
         return true;
     }
 

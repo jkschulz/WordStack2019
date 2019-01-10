@@ -23,43 +23,51 @@ import java.util.Stack;
 
 public class StackedLayout extends LinearLayout {
 
-    private Stack<View> tiles = new Stack();
+  private Stack<View> tiles = new Stack();
 
-    public StackedLayout(Context context) {
-        super(context);
+  public StackedLayout(Context context) {
+    super(context);
+  }
+
+  public void push(View tile) {
+    // call removeView with the tile on top of the stack (if there is one) to hide that tile
+    if (!tiles.empty()) {
+      removeView(tiles.peek());
     }
 
-    public void push(View tile) {
-        /**
-         **
-         **  YOUR CODE GOES HERE
-         **
-         **/
-    }
+    // push the specified tile onto the tiles stack
+    tiles.push(tile);
+    // call addView with the tile that was just pushed
+    addView(tiles.peek());
 
-    public View pop() {
-        View popped = null;
-        /**
-         **
-         **  YOUR CODE GOES HERE
-         **
-         **/
-        return popped;
-    }
+  }
 
-    public View peek() {
-        return tiles.peek();
+  public View pop() {
+    // pop a tile from tiles
+    View popped = tiles.pop();
+    if (popped != null) {
+      // call removeView with it
+      // call addView with the tile that is now on top of the stack
+      removeView(popped);
+      addView(tiles.peek());
     }
+    // return the popped tile
+    return popped;
+  }
 
-    public boolean empty() {
-        return tiles.empty();
-    }
+  public View peek() {
+    return tiles.peek();
+  }
 
-    public void clear() {
-        /**
-         **
-         **  YOUR CODE GOES HERE
-         **
-         **/
-    }
+  public boolean empty() {
+    return tiles.empty();
+  }
+
+  public void clear() {
+    /**
+     **
+     **  YOUR CODE GOES HERE
+     **
+     **/
+  }
 }
